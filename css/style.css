@@ -4,7 +4,10 @@
    Sections are appended in stages; each stage is clearly marked.
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Fonts are loaded via <link> tags in index.html's <head>, not
+   @import here: @import blocks CSS parsing until it resolves,
+   which is especially costly on slower/higher-latency mobile
+   connections. See index.html for the actual font <link> tags. */
 
 /* ------------------------------------------------------------
    1. DESIGN TOKENS
@@ -147,14 +150,11 @@ body.lang-en div[data-lang="en"] { display: block !important; }
   background: transparent;
   border-bottom: 1px solid transparent;
   transition: background var(--dur-fast) var(--ease-out),
-              border-color var(--dur-fast) var(--ease-out),
-              backdrop-filter var(--dur-fast) var(--ease-out);
+              border-color var(--dur-fast) var(--ease-out);
 }
 
 .nav.is-scrolled {
-  background: rgba(6, 7, 10, 0.78);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(6, 7, 10, 0.96);
   border-bottom: 1px solid var(--border);
 }
 
@@ -275,7 +275,6 @@ body.lang-en div[data-lang="en"] { display: block !important; }
   position: fixed;
   top: var(--nav-height); left: 0; right: 0;
   background: rgba(6, 7, 10, 0.98);
-  backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
   padding: 1.5rem var(--gutter) 2rem;
   display: flex;
@@ -499,29 +498,45 @@ body.lang-en div[data-lang="en"] { display: block !important; }
 }
 
 .marquee-viewport {
+  position: relative;
   overflow: hidden;
   width: 100%;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
+}
+
+.marquee-viewport::before,
+.marquee-viewport::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 8%;
+  min-width: 40px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.marquee-viewport::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--surface-2) 0%, transparent 100%);
+}
+
+.marquee-viewport::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--surface-2) 0%, transparent 100%);
 }
 
 .marquee-track {
   display: flex;
   align-items: center;
   width: max-content;
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 
 .marquee-track--a {
   animation: marqueeLeft 64s linear infinite;
-  animation-delay: -20s;
 }
 
 .marquee-track--b {
   animation: marqueeRight 92s linear infinite;
-  animation-delay: -35s;
 }
 
 .marquee-list {
@@ -888,9 +903,8 @@ body.lang-en div[data-lang="en"] { display: block !important; }
   transform: translate(-50%, -50%);
   width: 52px; height: 52px;
   border-radius: 50%;
-  background: rgba(6, 7, 10, 0.6);
+  background: rgba(6, 7, 10, 0.75);
   border: 1px solid rgba(243, 245, 248, 0.25);
-  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;

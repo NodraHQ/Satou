@@ -267,7 +267,9 @@
 
 .highlight-stats {
   display: flex;
-  gap: 1.4rem;
+  flex-wrap: wrap;
+  row-gap: 0.7rem;
+  column-gap: 1.4rem;
   padding-top: 1.1rem;
   border-top: 1px solid var(--border-soft);
 }
@@ -275,6 +277,7 @@
 .highlight-stat {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .highlight-stat-value {
@@ -290,6 +293,7 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted-2);
+  white-space: nowrap;
   margin-top: 0.3rem;
 }
 
@@ -388,6 +392,7 @@
 
 @media (max-width: 768px) {
   .highlight-grid { grid-template-columns: 1fr; }
+  .highlight-grid.pair { grid-template-columns: 1fr; }
   .case-timeline-header { flex-direction: column; align-items: flex-start; }
   .dashboard-kpis.kpis-3 { grid-template-columns: repeat(2, 1fr); max-width: none; }
 }
