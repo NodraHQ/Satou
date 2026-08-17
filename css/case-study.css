@@ -383,6 +383,10 @@
   justify-content: center;
 }
 
+.highlight-grid.quad {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 /* ------------------------------------------------------------
    RESPONSIVE
    ------------------------------------------------------------ */
@@ -393,6 +397,7 @@
 @media (max-width: 768px) {
   .highlight-grid { grid-template-columns: 1fr; }
   .highlight-grid.pair { grid-template-columns: 1fr; }
+  .highlight-grid.quad { grid-template-columns: 1fr; }
   .case-timeline-header { flex-direction: column; align-items: flex-start; }
   .dashboard-kpis.kpis-3 { grid-template-columns: repeat(2, 1fr); max-width: none; }
 }
