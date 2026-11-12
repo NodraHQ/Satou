@@ -59,15 +59,18 @@
 
   .hero-actions { flex-wrap: wrap; }
 
+  /* 2x2 grid: zera os paddings/bordas laterais da versão desktop */
   .hero-stats {
-    flex-wrap: wrap;
-    row-gap: 1.8rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6rem 1.2rem;
+    padding-top: 2rem;
   }
 
-  .hero-stat {
-    flex: 1 1 45%;
+  .hero-stat,
+  .hero-stat:not(:first-child) {
     border-right: none;
-    padding-right: 0;
+    padding: 0;
   }
 }
 
@@ -83,7 +86,6 @@
 
   .btn { padding: 0.75rem 1.3rem; font-size: 0.82rem; }
 
-  .hero-stat { flex: 1 1 100%; }
 }
 
 /* ------------------------------------------------------------
@@ -159,4 +161,27 @@
   .contact-link { justify-content: center; }
 
   .footer-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+/* ------------------------------------------------------------
+   EXTRAS: plataformas, formatos, formulário
+   ------------------------------------------------------------ */
+@media (max-width: 1024px) {
+  .platform-grid { grid-template-columns: 1fr 1fr; }
+  .platform-card--main { grid-column: 1 / -1; }
+  .service-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: 1fr; max-width: 640px; }
+}
+
+@media (max-width: 768px) {
+  .platform-grid { grid-template-columns: 1fr; }
+  .pstat-grid--main { grid-template-columns: 1fr 1fr; }
+  .service-grid { grid-template-columns: 1fr; }
+  .field-row { grid-template-columns: 1fr; }
+  .contact-form, .contact-aside { padding: 1.4rem; }
+  .contact-aside .contact-links { flex-direction: row; width: auto; }
+  .contact-character img { width: 260px; }
+  .hero-actions .btn-link { padding-left: 0; }
+  .hero-visual-frame { max-width: 200px; }
+  .hero-inner { gap: 1.5rem; }
 }

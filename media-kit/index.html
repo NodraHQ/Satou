@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Satou | Media Kit</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<!--
+  MEDIA KIT (fonte dos PDFs)
+  Esta página é o "molde" dos arquivos media-kit/satou-media-kit-pt.pdf
+  e -en.pdf. Depois de editar números/textos aqui, gere os PDFs de novo:
+      node scripts/build-assets.js
+  Cada .page é uma folha A4 exata (210 × 297 mm). Se algum texto crescer
+  demais, o script avisa que a página estourou.
+  ?lang=en mostra a versão em inglês.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=block">
+<style>
+  :root {
+    --black: #06070A;
+    --surface: #0D0F14;
+    --surface-2: #1A2230;
+    --border: #1E232C;
+    --blue: #3D8BFF;
+    --blue-bright: #5CA2FF;
+    --blue-dim: #2563EB;
+    --accent-2: #C9D6EA;
+    --white: #F3F5F8;
+    --muted: #8A94A3;
+    --muted-2: #5B6575;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  @page { size: A4; margin: 0; }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #111318; }
+  body {
+    font-family: var(--body);
+    color: var(--white);
+    font-size: 9.5pt;
+    line-height: 1.5;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  [data-lang] { display: none !important; }
+  body.lang-pt [data-lang="pt"], body.lang-en [data-lang="en"] { display: revert !important; }
+  body.lang-pt span[data-lang="pt"], body.lang-en span[data-lang="en"] { display: inline !important; }
+
+  /* ---------- sheet ---------- */
+  .page {
+    width: 210mm;
+    height: 297mm;
+    margin: 10mm auto;
+    padding: 13mm 14mm 11mm;
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(120mm 90mm at 100% 0%, rgba(61,139,255,0.16), transparent 70%),
+      var(--black);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+  @media print {
+    html, body { background: var(--black); }
+    .page { margin: 0; box-shadow: none; break-after: page; }
+    .page:last-child { break-after: auto; }
+    .screen-only { display: none !important; }
+  }
+
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 7pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 5mm;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand { display: flex; align-items: center; gap: 2mm; color: var(--white); font-family: var(--display); font-weight: 700; font-size: 10pt; letter-spacing: 0.02em; }
+  .brand::before { content: ''; width: 1.6mm; height: 1.6mm; border-radius: 50%; background: var(--blue); }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 6.8pt;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    gap: 2mm;
+    margin-bottom: 3mm;
+  }
+  .eyebrow::before { content: ''; width: 5mm; height: 1px; background: var(--blue); }
+
+  h1, h2, h3 { font-family: var(--display); line-height: 1.05; letter-spacing: -0.01em; }
+  h2 { font-size: 15pt; margin-bottom: 4mm; }
+
+  section { margin-top: 7mm; }
+
+  /* ---------- page 1: intro ---------- */
+  .intro { display: grid; grid-template-columns: 1fr 52mm; gap: 6mm; align-items: center; margin-top: 8mm; }
+  .intro h1 { font-size: 46pt; font-weight: 800; text-transform: uppercase; margin-bottom: 2mm; }
+  .mission { font-family: var(--display); font-size: 13.5pt; font-weight: 600; color: var(--muted); line-height: 1.3; margin-bottom: 4mm; }
+  .mission strong { color: var(--white); font-weight: 600; }
+  .bio { color: var(--muted); font-size: 9pt; max-width: 112mm; }
+  .bio strong { color: var(--white); font-weight: 500; }
+  .intro-visual { position: relative; height: 66mm; }
+  .intro-visual::before { content: ''; position: absolute; inset: 4mm 0; border: 1px solid var(--border); border-radius: 50%; }
+  .intro-visual img { position: relative; height: 100%; margin: 0 auto; object-fit: contain; }
+
+  /* ---------- platforms ---------- */
+  .platforms { display: grid; grid-template-columns: 1.45fr 1fr 1fr; gap: 3mm; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 3mm; padding: 4.5mm; }
+  .card--main { background: linear-gradient(160deg, rgba(61,139,255,0.10), transparent 60%), var(--surface); }
+  .p-head { display: flex; align-items: center; gap: 2.5mm; margin-bottom: 4mm; }
+  .p-icon { width: 8mm; height: 8mm; border-radius: 2mm; background: var(--surface-2); display: flex; align-items: center; justify-content: center; }
+  .p-icon svg { width: 4mm; height: 4mm; }
+  .p-name { font-family: var(--display); font-weight: 700; font-size: 10.5pt; line-height: 1.1; }
+  .p-meta { font-family: var(--mono); font-size: 6.2pt; color: var(--muted); }
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm 2mm; }
+  .card--main .stats { grid-template-columns: repeat(3, 1fr); }
+  .stat--big { grid-column: 1 / -1; }
+  .stat-v { font-family: var(--display); font-weight: 700; font-size: 12pt; line-height: 1.1; }
+  .stat--big .stat-v { font-size: 22pt; }
+  .stat-l { font-family: var(--mono); font-size: 5.8pt; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: 0.6mm; }
+
+  /* ---------- audience ---------- */
+  .audience { display: grid; grid-template-columns: 1.3fr 1fr; gap: 3mm; }
+  .card-title { font-family: var(--mono); font-size: 6.4pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 3.5mm; }
+  .bars { display: flex; flex-direction: column; gap: 2.2mm; }
+  .bar-label { display: flex; justify-content: space-between; font-size: 7.6pt; margin-bottom: 0.8mm; }
+  .bar-label b { font-family: var(--mono); font-weight: 500; color: var(--blue-bright); }
+  .track { height: 1.6mm; border-radius: 1mm; background: var(--surface-2); overflow: hidden; }
+  .fill { height: 100%; background: linear-gradient(90deg, var(--blue-dim), var(--blue)); border-radius: 1mm; }
+
+  .split { display: flex; height: 5mm; border-radius: 1.2mm; overflow: hidden; margin: 1mm 0 4mm; }
+  .split span { display: block !important; height: 100%; }
+  .legend { display: flex; flex-direction: column; gap: 2mm; }
+  .legend-row { display: flex; align-items: center; gap: 2mm; font-size: 8pt; color: var(--muted); }
+  .legend-row i { width: 2.2mm; height: 2.2mm; border-radius: 50%; }
+  .legend-row b { margin-left: auto; font-family: var(--mono); font-weight: 500; color: var(--white); }
+  .highlight { margin-top: 4mm; padding-top: 3.5mm; border-top: 1px solid var(--border); font-size: 8pt; color: var(--muted); }
+  .highlight strong { color: var(--white); font-weight: 600; }
+
+  /* ---------- brands ---------- */
+  .logos { display: grid; grid-template-columns: 0.8fr 1.3fr 1.2fr 1fr 0.8fr 1.3fr; align-items: center; justify-items: center; gap: 5mm; padding: 5mm 6mm; background: var(--surface); border: 1px solid var(--border); border-radius: 3mm; }
+  .logos img { width: auto; height: auto; max-width: 100%; max-height: 6mm; object-fit: contain; }
+
+  .foot {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 4mm;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    font-size: 6.6pt;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ---------- page 2: formats ---------- */
+  .formats { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  .fmt { display: flex; flex-direction: column; padding: 4mm 4.5mm; }
+  .case { padding: 4mm 4.5mm; }
+  .fmt-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2mm; }
+  .fmt h3 { font-size: 10.5pt; }
+  .tag { font-family: var(--mono); font-size: 5.8pt; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); border-radius: 5mm; padding: 0.5mm 2mm; white-space: nowrap; }
+  .fmt p { font-size: 7.8pt; color: var(--muted); line-height: 1.45; margin-bottom: 2.5mm; }
+  .fmt-price { margin-top: auto; display: flex; justify-content: space-between; align-items: baseline; padding-top: 2.2mm; border-top: 1px solid var(--border); }
+  .fmt-price > span { font-family: var(--mono); font-size: 5.8pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted-2); }
+  .fmt-price b { font-family: var(--display); font-size: 9.5pt; font-weight: 700; }
+  .note { margin-top: 3mm; font-size: 7.4pt; color: var(--muted); }
+
+  /* ---------- cases ---------- */
+  .cases { display: grid; grid-template-columns: 1fr 1fr; gap: 3mm; }
+  .case { display: grid; grid-template-columns: 1fr auto; gap: 1mm 3mm; align-items: start; }
+  .case img { height: 4.6mm; width: auto; grid-column: 1 / -1; margin-bottom: 1.5mm; }
+  .case p { font-size: 7.8pt; color: var(--muted); line-height: 1.4; }
+  .case-num { text-align: right; }
+  .case-num .stat-v { font-size: 14pt; }
+
+  /* ---------- contact ---------- */
+  .contact { margin-bottom: 4mm; display: grid; grid-template-columns: 1fr auto; gap: 6mm; align-items: center; background: linear-gradient(135deg, rgba(61,139,255,0.16), rgba(61,139,255,0.03)); border: 1px solid rgba(61,139,255,0.35); border-radius: 3mm; padding: 6mm; }
+  .contact h2 { font-size: 18pt; text-transform: uppercase; font-weight: 800; margin-bottom: 2mm; }
+  .contact h2 em { font-style: normal; color: var(--blue-bright); }
+  .contact-email { font-family: var(--display); font-size: 12pt; font-weight: 600; }
+  .contact-list { display: grid; grid-template-columns: auto auto; gap: 1.6mm 6mm; font-size: 8pt; }
+  .contact-list span { font-family: var(--mono); font-size: 6pt; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block !important; }
+
+  /* ---------- screen helper ---------- */
+  .screen-only { position: fixed; top: 16px; right: 16px; display: flex; gap: 8px; z-index: 10; }
+  .screen-only a { font: 600 13px var(--body); background: var(--blue); color: var(--black); padding: 10px 16px; border-radius: 8px; }
+  .screen-only a.ghost { background: transparent; color: var(--white); border: 1px solid var(--border); }
+  @media screen and (max-width: 800px) { .page { zoom: 0.45; } .screen-only { top: auto; bottom: 16px; } }
+</style>
+<script>
+  (function () {
+    var l = 'pt';
+    try { l = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'pt'; } catch (e) {}
+    document.documentElement.lang = l === 'en' ? 'en' : 'pt-BR';
+    document.addEventListener('DOMContentLoaded', function () { document.body.className = 'lang-' + l; });
+  })();
+</script>
+</head>
+<body class="lang-pt">
+
+  <div class="screen-only">
+    <a class="ghost" href="../">← Site</a>
+    <a href="satou-media-kit-pt.pdf" download data-lang="pt">Baixar PDF</a>
+    <a href="satou-media-kit-en.pdf" download data-lang="en">Download PDF</a>
+  </div>
+
+  <!-- ======================= PAGE 1 ======================= -->
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">SATOU</div>
+      <div><span data-lang="pt">Media kit · Novembro 2026</span><span data-lang="en">Media kit · November 2026</span></div>
+    </div>
+
+    <div class="intro">
+      <div>
+        <div class="eyebrow"><span data-lang="pt">Criador de conteúdo Web3</span><span data-lang="en">Web3 content creator</span></div>
+        <h1>Satou</h1>
+        <p class="mission">
+          <span data-lang="pt">Transformo produtos Web3 complexos em conteúdo que gera <strong>confiança, comunidade e adoção</strong>.</span>
+          <span data-lang="en">I turn complex Web3 products into content that builds <strong>trust, community and adoption</strong>.</span>
+        </p>
+        <p class="bio">
+          <span data-lang="pt">Conteúdo em português sobre cripto com foco em <strong>uso real</strong>: testo os produtos antes de falar deles e documento cada resultado com métricas. Fundador da <strong>Nodra</strong>, plataforma aberta de educação blockchain.</span>
+          <span data-lang="en">Portuguese-language crypto content focused on <strong>real usage</strong>: I test products before talking about them and document every result with metrics. Founder of <strong>Nodra</strong>, an open blockchain education platform.</span>
+        </p>
+      </div>
+      <div class="intro-visual"><img src="../assets/characters/character-hero.png" alt=""></div>
+    </div>
+
+    <section>
+      <div class="eyebrow"><span data-lang="pt">Números reais · exportados das plataformas</span><span data-lang="en">Real numbers · exported from each platform</span></div>
+      <div class="platforms">
+        <div class="card card--main">
+          <div class="p-head">
+            <div class="p-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.6 8.7L23.3 22h-7.2l-5.6-7.3L4 22H1l8.1-9.3L.9 2h7.3l5.1 6.7L18.9 2Zm-1.3 18h2L6.5 4H4.4l13.2 16Z"/></svg></div>
+            <div><div class="p-name">X · @Satoukibijusu</div><div class="p-meta"><span data-lang="pt">15 ago – 12 nov 2026 · 90 dias</span><span data-lang="en">Aug 15 – Nov 12, 2026 · 90 days</span></div></div>
+          </div>
+          <div class="stats">
+            <div class="stat stat--big"><div class="stat-v">338.5K</div><div class="stat-l"><span data-lang="pt">Impressões</span><span data-lang="en">Impressions</span></div></div>
+            <div class="stat"><div class="stat-v">5.1K</div><div class="stat-l"><span data-lang="pt">Engajamentos</span><span data-lang="en">Engagements</span></div></div>
+            <div class="stat"><div class="stat-v">3.4K</div><div class="stat-l">Likes</div></div>
+            <div class="stat"><div class="stat-v">1.1K</div><div class="stat-l"><span data-lang="pt">Respostas</span><span data-lang="en">Replies</span></div></div>
+            <div class="stat"><div class="stat-v">1.5%</div><div class="stat-l"><span data-lang="pt">Tx. engajamento</span><span data-lang="en">Eng. rate</span></div></div>
+            <div class="stat"><div class="stat-v">3.8K</div><div class="stat-l"><span data-lang="pt">Impressões/dia</span><span data-lang="en">Impressions/day</span></div></div>
+            <div class="stat"><div class="stat-v">62K</div><div class="stat-l"><span data-lang="pt">Pico em 1 dia</span><span data-lang="en">1-day peak</span></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="p-head">
+            <div class="p-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1"/></svg></div>
+            <div><div class="p-name">Instagram</div><div class="p-meta"><span data-lang="pt">Últimos 90 dias</span><span data-lang="en">Last 90 days</span></div></div>
+          </div>
+          <div class="stats">
+            <div class="stat stat--big"><div class="stat-v">5.7K</div><div class="stat-l"><span data-lang="pt">Visualizações</span><span data-lang="en">Views</span></div></div>
+            <div class="stat"><div class="stat-v">1.4K</div><div class="stat-l"><span data-lang="pt">Contas alcançadas</span><span data-lang="en">Accounts reached</span></div></div>
+            <div class="stat"><div class="stat-v">314</div><div class="stat-l"><span data-lang="pt">Interações</span><span data-lang="en">Interactions</span></div></div>
+            <div class="stat"><div class="stat-v">306</div><div class="stat-l"><span data-lang="pt">Seguidores</span><span data-lang="en">Followers</span></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="p-head">
+            <div class="p-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 2h-3.3v13.4a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.2a6.3 6.3 0 1 0 5.3 6.2V8.6a7.9 7.9 0 0 0 4.6 1.5V6.8a4.6 4.6 0 0 1-4.6-4.6Z"/></svg></div>
+            <div><div class="p-name">TikTok</div><div class="p-meta"><span data-lang="pt">12 set – 10 nov · 60 dias</span><span data-lang="en">Sep 12 – Nov 10 · 60 days</span></div></div>
+          </div>
+          <div class="stats">
+            <div class="stat stat--big"><div class="stat-v">4.2K</div><div class="stat-l"><span data-lang="pt">Views de vídeo</span><span data-lang="en">Video views</span></div></div>
+            <div class="stat"><div class="stat-v">126</div><div class="stat-l">Likes</div></div>
+            <div class="stat"><div class="stat-v">9</div><div class="stat-l"><span data-lang="pt">Comentários</span><span data-lang="en">Comments</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow"><span data-lang="pt">Quem me acompanha · audiência do X</span><span data-lang="en">Who follows me · X audience</span></div>
+      <div class="audience">
+        <div class="card">
+          <div class="card-title"><span data-lang="pt">Faixa etária</span><span data-lang="en">Age range</span></div>
+          <div class="bars">
+            <div><div class="bar-label"><span><span data-lang="pt">18 a 24</span><span data-lang="en">18 to 24</span></span><b>20.6%</b></div><div class="track"><div class="fill" style="width:20.6%"></div></div></div>
+            <div><div class="bar-label"><span><span data-lang="pt">25 a 34</span><span data-lang="en">25 to 34</span></span><b>44.2%</b></div><div class="track"><div class="fill" style="width:44.2%"></div></div></div>
+            <div><div class="bar-label"><span><span data-lang="pt">35 a 44</span><span data-lang="en">35 to 44</span></span><b>25.1%</b></div><div class="track"><div class="fill" style="width:25.1%"></div></div></div>
+            <div><div class="bar-label"><span><span data-lang="pt">45 ou mais</span><span data-lang="en">45 or older</span></span><b>7.6%</b></div><div class="track"><div class="fill" style="width:7.6%"></div></div></div>
+            <div><div class="bar-label"><span><span data-lang="pt">13 a 17</span><span data-lang="en">13 to 17</span></span><b>2.4%</b></div><div class="track"><div class="fill" style="width:2.4%"></div></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span data-lang="pt">Gênero</span><span data-lang="en">Gender</span></div>
+          <div class="split"><span style="width:74.5%;background:var(--blue)"></span><span style="width:25%;background:var(--accent-2)"></span><span style="width:0.5%;background:var(--muted-2)"></span></div>
+          <div class="legend">
+            <div class="legend-row"><i style="background:var(--blue)"></i><span data-lang="pt">Masculino</span><span data-lang="en">Male</span><b>74.5%</b></div>
+            <div class="legend-row"><i style="background:var(--accent-2)"></i><span data-lang="pt">Feminino</span><span data-lang="en">Female</span><b>25.0%</b></div>
+            <div class="legend-row"><i style="background:var(--muted-2)"></i><span data-lang="pt">Não especificado</span><span data-lang="en">Unspecified</span><b>0.5%</b></div>
+          </div>
+          <p class="highlight">
+            <span data-lang="pt"><strong>69%</strong> da audiência tem entre 25 e 44 anos: público adulto, com renda e já familiarizado com cripto.</span>
+            <span data-lang="en"><strong>69%</strong> of the audience is 25–44: adults with income, already familiar with crypto.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="eyebrow"><span data-lang="pt">Marcas com quem já trabalhei</span><span data-lang="en">Brands I've worked with</span></div>
+      <div class="logos">
+        <img src="../assets/logos/Team1_MAIN_WHITE.svg" alt="Team1">
+        <img src="../assets/logos/BitgetWallet.svg" alt="Bitget Wallet">
+        <img src="../assets/logos/pagfinance.svg" alt="PagFinance">
+        <img src="../assets/logos/amulets.png" alt="Amulets">
+        <img src="../assets/logos/mmerge.png" alt="Merge São Paulo">
+        <img src="../assets/logos/blockchainrio.png" alt="BlockchainRio">
+      </div>
+    </section>
+
+    <div class="foot">
+      <span>satoukibijusu@gmail.com</span>
+      <span>01 / 02</span>
+    </div>
+  </div>
+
+  <!-- ======================= PAGE 2 ======================= -->
+  <div class="page">
+    <div class="topbar">
+      <div class="brand">SATOU</div>
+      <div><span data-lang="pt">Formatos · Cases · Contato</span><span data-lang="en">Formats · Cases · Contact</span></div>
+    </div>
+
+    <section style="margin-top:6mm">
+      <div class="eyebrow"><span data-lang="pt">Formatos de parceria</span><span data-lang="en">Partnership formats</span></div>
+      <div class="formats">
+        <div class="card fmt">
+          <div class="fmt-top"><h3><span data-lang="pt">Post de Produto</span><span data-lang="en">Product Post</span></h3><span class="tag">X</span></div>
+          <p><span data-lang="pt">Uso real do produto, documentado com print ou foto e explicado no tom de usuário, não de anúncio.</span><span data-lang="en">Real product usage, documented with a screenshot or photo and explained as a user, not as an ad.</span></p>
+          <div class="fmt-price"><span data-lang="pt">Investimento</span><span data-lang="en">Investment</span><b><span data-lang="pt">Sob consulta</span><span data-lang="en">On request</span></b></div>
+        </div>
+        <div class="card fmt">
+          <div class="fmt-top"><h3><span data-lang="pt">Thread Educativa</span><span data-lang="en">Educational Thread</span></h3><span class="tag">X</span></div>
+          <p><span data-lang="pt">Explicação aprofundada de um conceito ou protocolo com exemplos reais. Ideal para produtos técnicos.</span><span data-lang="en">An in-depth breakdown of a concept or protocol with real examples. Ideal for technical products.</span></p>
+          <div class="fmt-price"><span data-lang="pt">Investimento</span><span data-lang="en">Investment</span><b><span data-lang="pt">Sob consulta</span><span data-lang="en">On request</span></b></div>
+        </div>
+        <div class="card fmt">
+          <div class="fmt-top"><h3><span data-lang="pt">Vídeo Curto</span><span data-lang="en">Short Video</span></h3><span class="tag">X · Reels · TikTok</span></div>
+          <p><span data-lang="pt">Vídeo vertical com storytelling, com roteiro, gravação e edição, publicado nas três plataformas.</span><span data-lang="en">Vertical storytelling video (script, filming and editing), published on all three platforms.</span></p>
+          <div class="fmt-price"><span data-lang="pt">Investimento</span><span data-lang="en">Investment</span><b><span data-lang="pt">Sob consulta</span><span data-lang="en">On request</span></b></div>
+        </div>
+        <div class="card fmt">
+          <div class="fmt-top"><h3><span data-lang="pt">Lançamento ou Atualização</span><span data-lang="en">Launch or Update</span></h3><span class="tag">X</span></div>
+          <p><span data-lang="pt">Tradução de um lançamento ou atualização técnica em informação clara para a comunidade, no dia do anúncio.</span><span data-lang="en">Turning a launch or technical update into clear information for the community, on announcement day.</span></p>
+          <div class="fmt-price"><span data-lang="pt">Investimento</span><span data-lang="en">Investment</span><b><span data-lang="pt">Sob consulta</span><span data-lang="en">On request</span></b></div>
+        </div>
+        <div class="card fmt">
+          <div class="fmt-top"><h3><span data-lang="pt">Cobertura de Evento</span><span data-lang="en">Event Coverage</span></h3><span class="tag">X · Instagram</span></div>
+          <p><span data-lang="pt">Conteúdo em tempo real no evento: bastidores, entrevistas e destaques, usando o evento como gancho para a marca.</span><span data-lang="en">Real-time content on site: behind the scenes, interviews and highlights, using the event as a hook for the brand.</span></p>
+          <div class="fmt-price"><span data-lang="pt">Investimento</span><span data-lang="en">Investment</span><b><span data-lang="pt">Sob consulta</span><span data-lang="en">On request</span></b></div>
+        </div>
+        <div class="card fmt">
+          <div class="fmt-top"><h3><span data-lang="pt">Campanha Contínua</span><span data-lang="en">Ongoing Campaign</span></h3><span class="tag">X</span></div>
+          <p><span data-lang="pt">Série de posts ao longo de semanas, com cadência fixa, ajuste por métrica e case study no final. Também como afiliado.</span><span data-lang="en">A multi-week post series with fixed cadence, metric-driven tweaks and a final case study. Affiliate model available.</span></p>
+          <div class="fmt-price"><span data-lang="pt">Investimento</span><span data-lang="en">Investment</span><b><span data-lang="pt">Sob consulta</span><span data-lang="en">On request</span></b></div>
+        </div>
+      </div>
+      <p class="note">
+        <span data-lang="pt">Todo trabalho inclui roteiro alinhado com a marca e relatório de métricas. Valores variam conforme escopo, prazo e exclusividade; pacotes têm condição especial.</span>
+        <span data-lang="en">Every deal includes a brand-aligned script and a metrics report. Pricing depends on scope, timeline and exclusivity; bundles get special terms.</span>
+      </p>
+    </section>
+
+    <section>
+      <div class="eyebrow"><span data-lang="pt">Case studies</span><span data-lang="en">Case studies</span></div>
+      <div class="cases">
+        <div class="card case">
+          <img src="../assets/logos/pagfinance.svg" alt="PagFinance">
+          <p><span data-lang="pt">4 semanas mostrando o cartão e o onramp em gastos reais do dia a dia, sem anúncio pago.</span><span data-lang="en">4 weeks showing the card and onramp in real everyday spending, no paid ads.</span></p>
+          <div class="case-num"><div class="stat-v">6,556</div><div class="stat-l"><span data-lang="pt">views · 9 posts</span><span data-lang="en">views · 9 posts</span></div></div>
+        </div>
+        <div class="card case">
+          <img src="../assets/logos/amulets.png" alt="Amulets">
+          <p><span data-lang="pt">Campanha de afiliado contínua documentando pagamentos cripto em compras reais.</span><span data-lang="en">Ongoing affiliate campaign documenting crypto payments in real purchases.</span></p>
+          <div class="case-num"><div class="stat-v">6,097</div><div class="stat-l"><span data-lang="pt">views · 10 posts</span><span data-lang="en">views · 10 posts</span></div></div>
+        </div>
+        <div class="card case">
+          <img src="../assets/logos/blockchainrio.png" alt="BlockchainRio">
+          <p><span data-lang="pt">Vídeos para CapyFi e Team1/Avalanche usando o evento como gancho, no X e no Instagram.</span><span data-lang="en">Videos for CapyFi and Team1/Avalanche using the event as a hook, on X and Instagram.</span></p>
+          <div class="case-num"><div class="stat-v">8,802</div><div class="stat-l"><span data-lang="pt">views · 4 vídeos</span><span data-lang="en">views · 4 videos</span></div></div>
+        </div>
+        <div class="card case">
+          <img src="../assets/logos/mmerge.png" alt="Merge São Paulo">
+          <p><span data-lang="pt">Cobertura da presença da Merge no ecossistema Web3 brasileiro, direto do evento.</span><span data-lang="en">Coverage of Merge's presence in the Brazilian Web3 ecosystem, straight from the event.</span></p>
+          <div class="case-num"><div class="stat-v">2,562</div><div class="stat-l"><span data-lang="pt">views · 6 posts</span><span data-lang="en">views · 6 posts</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="contact">
+        <div>
+          <h2><span data-lang="pt">Vamos trabalhar <em>juntos</em></span><span data-lang="en">Let's work <em>together</em></span></h2>
+          <a class="contact-email" href="mailto:satoukibijusu@gmail.com">satoukibijusu@gmail.com</a>
+        </div>
+        <div class="contact-list">
+          <a href="https://x.com/Satoukibijusu"><span>X</span>@Satoukibijusu</a>
+          <a href="https://t.me/Satoukibijusu"><span>Telegram</span>@Satoukibijusu</a>
+          <a href="https://www.instagram.com/satoukibijusu/"><span>Instagram</span>@satoukibijusu</a>
+          <a href="https://www.tiktok.com/@satoukibijusu"><span>TikTok</span>@satoukibijusu</a>
+          <a href="https://www.linkedin.com/in/satoukibijusu"><span>LinkedIn</span>/in/satoukibijusu</a>
+          <a href="https://satou.vercel.app" data-site-url><span>Site</span>satou.vercel.app</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="foot">
+      <span data-lang="pt">Métricas: X Analytics, Instagram Insights e TikTok Studio · nov 2026</span>
+      <span data-lang="en">Metrics: X Analytics, Instagram Insights and TikTok Studio · Nov 2026</span>
+      <span>02 / 02</span>
+    </div>
+  </div>
+
+</body>
+</html>

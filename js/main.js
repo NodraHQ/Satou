@@ -16,10 +16,32 @@
   const LangToggle = (function () {
     let current = 'pt';
 
+    function stored() {
+      try {
+        const fromUrl = new URLSearchParams(location.search).get('lang');
+        if (fromUrl === 'pt' || fromUrl === 'en') return fromUrl;
+        const v = localStorage.getItem('satou-lang');
+        return v === 'en' ? 'en' : 'pt';
+      } catch (e) { return 'pt'; }
+    }
+
     function apply(lang) {
       current = lang;
       document.body.classList.remove('lang-pt', 'lang-en');
       document.body.classList.add('lang-' + lang);
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+      try { localStorage.setItem('satou-lang', lang); } catch (e) { /* modo privado */ }
+
+      /* links com versão por idioma (ex.: media kit PDF) */
+      document.querySelectorAll('[data-href-en]').forEach((a) => {
+        if (!a.hasAttribute('data-href-pt')) a.setAttribute('data-href-pt', a.getAttribute('href'));
+        a.setAttribute('href', a.getAttribute(lang === 'en' ? 'data-href-en' : 'data-href-pt'));
+      });
+
+      /* selects duplicados por idioma: só o visível é enviado */
+      document.querySelectorAll('select[data-lang]').forEach((sel) => {
+        sel.disabled = sel.getAttribute('data-lang') !== lang;
+      });
 
       document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
         btn.textContent = lang === 'pt' ? 'EN' : 'PT';
@@ -32,7 +54,7 @@
     }
 
     function init() {
-      apply(current);
+      apply(stored());
       document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
         btn.addEventListener('click', toggle);
       });
@@ -172,6 +194,78 @@
   })();
 
   /* ------------------------------------------------------------
+     MODULE: Contact form (FormSubmit via fetch)
+     Sem JS, o <form> faz POST normal para o FormSubmit.
+     Botões [data-service] pré-selecionam o formato no form.
+     ------------------------------------------------------------ */
+  const ContactForm = (function () {
+    const MSG = {
+      pt: {
+        sending: 'Enviando...',
+        ok: 'Mensagem enviada! Vou responder no e-mail informado.',
+        error: 'Não foi possível enviar. Escreva direto para <a href="mailto:satoukibijusu@gmail.com">satoukibijusu@gmail.com</a>.'
+      },
+      en: {
+        sending: 'Sending...',
+        ok: 'Message sent! I will reply to the email you provided.',
+        error: 'Could not send. Please email <a href="mailto:satoukibijusu@gmail.com">satoukibijusu@gmail.com</a> directly.'
+      }
+    };
+
+    function lang() {
+      return document.body.classList.contains('lang-en') ? 'en' : 'pt';
+    }
+
+    function preselect(key) {
+      document.querySelectorAll('#contact-form select').forEach((sel) => {
+        const opt = sel.querySelector('option[data-key="' + key + '"]');
+        if (opt) sel.value = opt.value;
+      });
+    }
+
+    function init() {
+      const form = document.getElementById('contact-form');
+      if (!form) return;
+      const status = form.querySelector('.form-status');
+      const btn = form.querySelector('button[type="submit"]');
+
+      document.querySelectorAll('[data-service]').forEach((el) => {
+        el.addEventListener('click', () => preselect(el.getAttribute('data-service')));
+      });
+
+      form.addEventListener('submit', function (e) {
+        if (!window.fetch || !window.FormData) return; /* fallback: POST normal */
+        e.preventDefault();
+        const m = MSG[lang()];
+        status.className = 'form-status';
+        status.textContent = m.sending;
+        btn.disabled = true;
+
+        const endpoint = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: new FormData(form)
+        })
+          .then((r) => r.json().then((d) => ({ ok: r.ok, d: d })))
+          .then((res) => {
+            if (!res.ok || String(res.d.success) !== 'true') throw new Error(res.d.message || 'fail');
+            status.className = 'form-status is-ok';
+            status.textContent = m.ok;
+            form.reset();
+          })
+          .catch(() => {
+            status.className = 'form-status is-error';
+            status.innerHTML = m.error;
+          })
+          .finally(() => { btn.disabled = false; });
+      });
+    }
+
+    return { init };
+  })();
+
+  /* ------------------------------------------------------------
      BOOT
      ------------------------------------------------------------ */
   document.addEventListener('DOMContentLoaded', function () {
@@ -179,5 +273,6 @@
     Nav.init();
     ScrollReveal.init();
     Counters.init();
+    ContactForm.init();
   });
 })();
