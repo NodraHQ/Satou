@@ -1328,7 +1328,7 @@ body.lang-en div[data-lang="en"] { display: block !important; }
 
 .platform-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 1.25rem;
   margin-bottom: 1.25rem;
 }
@@ -1337,35 +1337,45 @@ body.lang-en div[data-lang="en"] { display: block !important; }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 1.6rem;
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   transition: border-color var(--dur-fast) ease;
 }
 .platform-card:hover { border-color: var(--blue-dim); }
+
+/* X: card largo, número principal à esquerda e 6 métricas à direita */
 .platform-card--main {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 2.5rem;
+  align-items: stretch;
   background: linear-gradient(160deg, rgba(61,139,255,0.08), transparent 55%), var(--surface);
 }
+.platform-main-left { display: flex; flex-direction: column; }
+.platform-card--main .platform-big { margin-bottom: 0; margin-top: auto; }
 
 .platform-head {
   display: flex;
   align-items: center;
   gap: 0.85rem;
-  flex-wrap: wrap;
+  margin-bottom: 1.75rem;
 }
 .platform-icon {
-  width: 38px; height: 38px;
+  width: 40px; height: 40px;
   border-radius: 10px;
   background: var(--surface-2);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
 }
 .platform-icon svg { width: 18px; height: 18px; }
+.platform-id { min-width: 0; }
 .platform-name {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.05rem;
+  line-height: 1.2;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -1381,42 +1391,46 @@ body.lang-en div[data-lang="en"] { display: block !important; }
   border-radius: 20px;
   padding: 0.12rem 0.5rem;
 }
-.platform-period {
+.platform-meta {
   font-family: var(--font-mono);
   font-size: 0.68rem;
   color: var(--muted);
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
 }
-.platform-handle {
-  margin-left: auto;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--muted);
-  transition: color var(--dur-fast) ease;
-}
-.platform-handle:hover { color: var(--blue-bright); }
+.platform-meta a { color: var(--white); transition: color var(--dur-fast) ease; }
+.platform-meta a:hover { color: var(--blue-bright); }
 
+.platform-big { margin-bottom: 1.5rem; }
+.platform-big .pstat-value { font-size: clamp(2.2rem, 3.6vw, 2.9rem); }
+
+/* Métricas menores: colunas iguais, separadas por linha e divisórias */
 .pstat-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.2rem 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--border);
 }
-.pstat-grid--main { grid-template-columns: repeat(3, 1fr); }
-.pstat--big { grid-column: 1 / -1; }
+.pstat-grid--6 { margin-top: 0; border-top: none; align-content: center; row-gap: 0; }
+.pstat {
+  padding: 1.1rem 1rem 0.2rem;
+  border-left: 1px solid var(--border-soft);
+}
+.pstat:nth-child(3n+1) { border-left: none; padding-left: 0; }
+.pstat-grid--6 .pstat:nth-child(n+4) { border-top: 1px solid var(--border); margin-top: 1.1rem; }
+.pstat-grid--6 .pstat:nth-child(-n+3) { padding-top: 0.2rem; }
 .pstat-value {
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   font-weight: 700;
   line-height: 1.1;
 }
-.pstat--big .pstat-value { font-size: clamp(2rem, 3.2vw, 2.6rem); }
 .pstat-label {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.64rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--muted);
-  margin-top: 0.3rem;
+  margin-top: 0.35rem;
+  line-height: 1.35;
 }
 
 /* --- Formats / services --- */

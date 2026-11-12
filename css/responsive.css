@@ -167,15 +167,20 @@
    EXTRAS: plataformas, formatos, formulário
    ------------------------------------------------------------ */
 @media (max-width: 1024px) {
-  .platform-grid { grid-template-columns: 1fr 1fr; }
-  .platform-card--main { grid-column: 1 / -1; }
+  .platform-card--main { grid-template-columns: 1fr; gap: 1.75rem; }
+  .platform-meta a { display: block; margin-bottom: 0.1rem; }
+  .platform-meta .meta-sep { display: none; }
+  .platform-card--main .platform-big { margin-top: 0; }
   .service-grid { grid-template-columns: repeat(2, 1fr); }
   .contact-grid { grid-template-columns: 1fr; max-width: 640px; }
 }
 
 @media (max-width: 768px) {
   .platform-grid { grid-template-columns: 1fr; }
-  .pstat-grid--main { grid-template-columns: 1fr 1fr; }
+  .platform-card { padding: 1.4rem; }
+  .pstat { padding-left: 0.75rem; padding-right: 0.5rem; }
+  .pstat-value { font-size: 1.25rem; }
+  .pstat-label { font-size: 0.58rem; letter-spacing: 0.04em; }
   .service-grid { grid-template-columns: 1fr; }
   .field-row { grid-template-columns: 1fr; }
   .contact-form, .contact-aside { padding: 1.4rem; }
